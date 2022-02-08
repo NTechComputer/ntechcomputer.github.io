@@ -7,8 +7,10 @@ body{
     flex-direction: row;
     justify-items: center;
     width: 100%;
+    border-bottom: 1px solid blueviolet;
 }
 
 .logo{
     width: 100px;
+    height: 50px;
 }
