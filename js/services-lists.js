@@ -46,13 +46,15 @@ var itemsLength;
     itemsLength = 0;
     // content section
     let sheetId = "1VRTUEZawCxjwC0j4g33NCSZ72mT2AJMbzOKm-xeBJNg";
-    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=it-services-link`;
+    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=debit-list`;
     fetch(url).then(res => res.text()).then(response => {
         let data = JSON.parse(String(response).substr(47).slice(0, -2)).table.rows;
         // console.log(data)
         fetch("./contents/lists.html?t=" + new Date().getTime()).then(res => res.text()).then(response => {
             document.getElementById("container").innerHTML = response;
-            document.title = "IT Services List";
+            document.title = "Services List";
+            document.querySelector("h1").innerText = "Services Lists";
+            document.querySelector(".container .title2").innerText = "Price";
             itemsLength = data.length;
                 for(let i = 0; i < data.length; i++){
                     // items["item" + i] = [data[i].c[0].v,  data[i].c[1]?data[i].c[1].v:"", data[i].c[2].v];
@@ -65,7 +67,7 @@ var itemsLength;
                                     <div class="header">${data[i].c[2].v}</div>
                                     <div onclick = 'window.open("${data[i].c[1]?data[i].c[1].v:''}", "", "popup")' class="instraction">
                                     <div class="service">${(data[i].c[0].v).replace(/\\n/g, "<br>")}</div>
-                                    <div class="link">${data[i].c[1]?data[i].c[1].v:""}</div>
+                                    <div class="link price">Price: ${data[i].c[1]?data[i].c[1].v:""}</div>
                                     </div>
                                     
                                 </div>
@@ -92,7 +94,7 @@ var itemsLength;
     function editItem(i){
         let item = document.getElementById("item" + i)
         document.getElementById("services-name").value = item.querySelector(".service").innerText;
-        document.getElementById("link").value = item.querySelector(".link").innerText;
+        document.getElementById("link").value = item.querySelector(".link").innerText.replace("Price: ", "");
         document.querySelector(".container").style.display = "flex";
         setTimeout(function(){
             document.querySelector(".addEdit").style.transform = "scale(1)";
@@ -103,11 +105,11 @@ var itemsLength;
 
     function addEditDone(type, i){
         let userInfo = JSON.parse(localStorage.userInfo);
-        let data  = [document.getElementById("services-name").value, document.getElementById("link").value, "Added by " + userInfo.name];
+        let data  = [document.getElementById("services-name").value, document.getElementById("link").value.replace("Price: ", "").trim().split(" ")[0], "Added by " + userInfo.name];
         if(type == "edit") {
             data[2] = "Modified by " + userInfo.name;
             document.getElementById("item" + i).querySelector(".service").innerText = data[0];
-            document.getElementById("item" + i).querySelector(".link").innerText = data[1];
+            document.getElementById("item" + i).querySelector(".link").innerText = "Price: " + data[1];
             document.getElementById("item" + i).querySelector(".header").innerText = data[1];
         }
         else{
@@ -120,7 +122,7 @@ var itemsLength;
                                     <div class="header">${data[2]}</div>
                                     <div onclick = 'window.open("${data[1]}", "", "popup")' class="instraction">
                                     <div class="service">${(data[0]).replace(/\\n/g, "<br>")}</div>
-                                    <div class="link">${data[1]}</div>
+                                    <div class="link price">Price: ${data[1]}</div>
                                     </div>
                                 </div>
                                 `;
@@ -141,7 +143,7 @@ var itemsLength;
     function submitItems(type, i){
         closeErr(); closeSucc();
         let userInfo = JSON.parse(localStorage.userInfo);
-        let data  = [document.getElementById("services-name").value, document.getElementById("link").value, "Added by " + userInfo.name];
+        let data  = [document.getElementById("services-name").value, document.getElementById("link").value.replace("Price: ", "").trim().split(" ")[0], "Added by " + userInfo.name];
         if(type == "edit") data[2] = "Modified by " + userInfo.name;
         let btn =  document.querySelector(".btn");
         btn.style.background = '#94d3a2';
@@ -152,7 +154,7 @@ var itemsLength;
         document.getElementById("loading").style.display = "block";
 
         let form = new FormData();
-        form.append("action", "it-services-link");
+        form.append("action", "debit-list");
         form.append("data", JSON.stringify([data]));
         form.append("index", (Number(i) + 1))
 
