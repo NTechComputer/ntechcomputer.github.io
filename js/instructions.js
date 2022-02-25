@@ -153,7 +153,7 @@ var itemsLength;
 
         let form = new FormData();
         form.append("action", "instructions");
-        form.append("data", Object.values(items));
+        form.append("data", JSON.stringify(Object.values(items)));
 
         let url = "https://script.google.com/macros/s/AKfycbyP3th_Q4UW8qV_m6WuiHDn_sk_AF7FQ2Dzu2Z_jQ/exec";
         fetch(url, {
@@ -164,6 +164,7 @@ var itemsLength;
             },
             body: form
         }).then(res => res.text()).then(response => {
+                console.log(response)
                 response = JSON.parse(response);
                 btn.style.background = '';
                 btn.style.color = '';
