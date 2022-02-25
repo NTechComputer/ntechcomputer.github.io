@@ -33,6 +33,7 @@
     }
 
     function logout(){
+        closeMenu();
         delete localStorage.userInfo;
         content.innerHTML = "";
         loading.style.display = "block";
@@ -143,6 +144,7 @@ var itemsLength;
     }
 
     function submitItems(){
+        closeErr(); closeSucc();
         let btn =  document.querySelector(".btn");
         btn.style.background = '#94d3a2';
         btn.style.color ='#eee';
