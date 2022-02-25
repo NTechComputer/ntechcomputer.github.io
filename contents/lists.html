@@ -36,7 +36,7 @@
         resize: none;
     }
 
-    .addEdit textarea:focus{
+    .addEdit textarea:focus, #branch:focus{
         box-shadow: rgba(9, 105, 218, 0.3) 0px 0px 0px 3px;
         border-color: rgb(9, 105, 218);
     }
@@ -131,11 +131,29 @@
         text-align: center;
     }
 
+    #branch{
+        margin-bottom: 20px;
+        padding: 6px 12px;
+        width: 100%;
+        border-radius: 6px;
+        color: #24292f;
+        border: 1px solid #d0d7de;
+        outline: none;
+        font-size: 14px;
+        transition: all 0.35s;
+        background-color: #f6f8fa;
+        display: none;
+    }
+
 
 </style>
 
 <main>
     <h1>IT Services Link</h1>
+    <select onchange="branchChange(this.value)" id="branch">
+        <option value="bagadi">Bagadi</option>
+        <option value="courasta">Caurasta</option>
+    </select>
     <div id="content"></div>
     <div>
         <button onclick="addItem()" class="addBtn">Add</button>
@@ -144,25 +162,27 @@
 
 <div class="container">
     <div class="addEdit">
-        <svg onclick="closeAddEdit()" aria-hidden="true" style="position:absolute; right: 5px; top: 5px; fill: rgb(207, 34, 46); cursor: pointer" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
-            <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
-        </svg>
-        <div class="title">Services Name</div>
-        <textarea autocomplete="off" name="" id="services-name"></textarea>
-        <div class="title title2">Link</div>
-        <textarea autocomplete="off" name="" id="link"></textarea>
-        <div class="error">
-            <div style="width: 100%; text-align: left;">Error! Please try again.</div>
-            <svg onclick="closeErr()" aria-hidden="true" style="fill: rgb(207, 34, 46); cursor: pointer" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
+        <form onsubmit="return false;">
+            <svg onclick="closeAddEdit()" aria-hidden="true" style="position:absolute; right: 5px; top: 5px; fill: rgb(207, 34, 46); cursor: pointer" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
                 <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
             </svg>
-        </div>
-        <div class="success">
-            <div style="width: 100%; text-align: left;">Successfully completed!</div>
-            <svg onclick="closeSucc()" aria-hidden="true" style="fill: rgb(34, 207, 92); cursor: pointer" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
-                <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
-            </svg>
-        </div>
-        <button class="btn" onclick="submitItems()" id="addEditBtn">Submit</button>
+            <div class="title">Services Name</div>
+            <textarea required autocomplete="off" name="" id="services-name"></textarea>
+            <div class="title title2">Link</div>
+            <textarea required autocomplete="off" name="" id="link"></textarea>
+            <div class="error">
+                <div style="width: 100%; text-align: left;">Error! Please try again.</div>
+                <svg onclick="closeErr()" aria-hidden="true" style="fill: rgb(207, 34, 46); cursor: pointer" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
+                    <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
+                </svg>
+            </div>
+            <div class="success">
+                <div style="width: 100%; text-align: left;">Successfully completed!</div>
+                <svg onclick="closeSucc()" aria-hidden="true" style="fill: rgb(34, 207, 92); cursor: pointer" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x">
+                    <path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
+                </svg>
+            </div>
+            <button type="button" class="btn" onclick="submitItems()" id="addEditBtn">Submit</button>
+        </form>
     </div>
 </div>
