@@ -1,0 +1,36 @@
+<header>
+    <svg onclick="openMenu()" class="menuBtn" style="cursor: pointer;" aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true" class="octicon octicon-three-bars">
+        <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+    </svg>
+    <div>
+        <img class="logo" src="./logo.svg" alt="NTech Logo">
+    </div>
+</header>
+<div onclick="closeMenu()" class="nav"></div>
+<nav id="menu">
+    <div class="profile">
+        <img id="userPhoto" src="./user.svg" alt="user photo">
+        <div id="userName"></div>
+    </div>
+    <div class="menuItems">
+        <div onclick="openMenuItem('instructions')">Instractions</div>
+        <div onclick="openMenuItem('it-services-link')">IT Services Link</div>
+        <div onclick="openMenuItem('services-lists')">Servics Lists</div>
+        <div onclick="openMenuItem('cost-lists')">Cost Lists</div>
+        <div onclick="openMenuItem('attendence')">Attendence Lists</div>
+        <div onclick="openMenuItem('cashbook')">Cashbook</div>
+        <div onclick="logout()">Logout</div>
+    </div>
+</nav>
+
+<div id="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<div id="container"></div>

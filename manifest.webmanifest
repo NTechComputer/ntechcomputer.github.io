@@ -1,0 +1,15 @@
+{
+  "background_color": "#f6f8fa",
+  "description": "NTech Shop Management System!",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "640x640",
+      "type": "image/png"
+    }
+  ],
+  "name": "NTech",
+  "short_name": "NTech",
+  "start_url": "/index.html"
+}

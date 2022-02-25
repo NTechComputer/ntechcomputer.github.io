@@ -6,14 +6,14 @@ body{
 }
 
 .container{
-    /* display: flex;
-    height: 100vh;
+    display: flex;
+    height: 90vh;
     width: 100%;
     align-items: center;
     justify-content: center;
-    flex-direction: column; */
-    width: max-content;
-    margin: auto;
+    flex-direction: column;
+    /* width: max-content;
+    margin: auto; */
     text-align: center;
 }
 
@@ -35,7 +35,7 @@ h1{
     border: 1px solid #d8dee4;
     background-color: #f6f8fa;
     border-radius: 6px;
-    width: 274px;
+    width: 300px;
     display: block;
 }
 
