@@ -4,9 +4,9 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "icon.svg",
-      "sizes": "150x150",
-      "type": "image/svg"
+      "src": "icon.png",
+      "sizes": "640x640",
+      "type": "image/png"
     }
   ],
   "name": "NTech",
