@@ -152,7 +152,7 @@ var itemsLength;
 
         let form = new FormData();
         form.append("action", "it-services-link");
-        form.append("data", JSON.stringify(data));
+        form.append("data", JSON.stringify([data]));
         form.append("index", (Number(i) + 1))
 
         let url = "https://script.google.com/macros/s/AKfycbyP3th_Q4UW8qV_m6WuiHDn_sk_AF7FQ2Dzu2Z_jQ/exec";
