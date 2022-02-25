@@ -46,16 +46,20 @@ var itemsLength;
     items = {};
     itemsLength = 0;
     // content section
-    let sheetId = "1VRTUEZawCxjwC0j4g33NCSZ72mT2AJMbzOKm-xeBJNg";
-    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=instractions`;
+    let sheetId = "1xIFFwO5SD7evh6uHPQFPmrc7KARGMqJZ8ec6N35XIsc";
+    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=emailList`;
     fetch(url).then(res => res.text()).then(response => {
         let data = JSON.parse(String(response).substr(47).slice(0, -2)).table.rows;
         // console.log(data)
         fetch("./contents/instructions.html?t=" + new Date().getTime()).then(res => res.text()).then(response => {
             document.getElementById("container").innerHTML = response;
-            document.title = "Instructions";
+            document.title = "Email List";
+            document.querySelector("h1").innerText = "Email List";
+            document.querySelector(".container .title").innerText = "Email Address";
+            document.
             itemsLength = data.length;
-                for(let i = 0; i < data.length; i++){
+            items["item" + 0] = [data[0].c[0].v,  data[0].c[1].v];
+                for(let i = 1; i < data.length; i++){
                     items["item" + i] = [data[i].c[0].v,  data[i].c[1].v];
                     let edit = document.createElement("div");
                     edit.innerHTML = `
@@ -109,10 +113,10 @@ var itemsLength;
 
     function addEditDone(type, i){
         let userInfo = JSON.parse(localStorage.userInfo);
-        let data  = [document.getElementById("addEdit").value, "Added by " + userInfo.name];
+        let data  = [String(document.getElementById("addEdit").value).split("\n")[0], "Added by " + userInfo.name];
         if(type == "edit") {
             data[1] = "Modified by " + userInfo.name;
-            document.getElementById("item" + i).querySelector(".instraction").innerText = document.getElementById("addEdit").value;
+            document.getElementById("item" + i).querySelector(".instraction").innerText = data[0];
             document.getElementById("item" + i).querySelector(".footer").innerText = data[1];
         }
         else{
@@ -152,7 +156,7 @@ var itemsLength;
         document.getElementById("loading").style.display = "block";
 
         let form = new FormData();
-        form.append("action", "instructions");
+        form.append("action", "emailList");
         form.append("data", JSON.stringify(Object.values(items)));
 
         let url = "https://script.google.com/macros/s/AKfycbyP3th_Q4UW8qV_m6WuiHDn_sk_AF7FQ2Dzu2Z_jQ/exec";
