@@ -5,6 +5,7 @@ self.addEventListener('install', (e) => {
         '/icon.svg',
         '/logo.svg',
         '/index.html',
+        '/css/login.css',
       ])),
     );
   });

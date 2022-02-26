@@ -18,10 +18,34 @@
     let btn = document.getElementById("btn");
 
     if(localStorage.userInfo){
-        let userInfo = JSON.parse(localStorage.userInfo);
-        username.value = userInfo.username;
-        password.value = userInfo.password;
-        login();
+        document.querySelector(".container").style.display = 'none';
+        document.querySelector("#loading").style.display = 'inline';
+        let url = "./contents/main.html?t=" + new Date().getTime();
+        let data = JSON.parse(localStorage.userInfo);
+        fetch(url).then(res => res.text()).then(response => {
+            let link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "css/main.css?t=" + new Date().getTime();
+            link.onload = function(){
+                document.getElementById("stylesheet").remove();
+                this.id = "stylesheet";
+
+                document.body.innerHTML = "";
+                document.body.innerHTML = response;
+                document.title = "Instructions";
+                let script = document.createElement("script");
+                script.src = "js/instructions.js?t=" + new Date().getTime();
+                script.onload = function(){
+                    document.getElementById("userName").innerText = data.name;
+                    document.getElementById("userPhoto").src = data.photo ? data.photo : "./user.svg";
+                    document.getElementsByTagName("script")[0].remove();
+                }
+                document.body.appendChild(script);
+                
+            }
+            document.head.appendChild(link);
+        })
+        .catch(err => {console.log(err)})
     }
 
     function closeErr(){

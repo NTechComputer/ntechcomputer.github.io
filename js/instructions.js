@@ -34,6 +34,8 @@
 
     function logout(){
         closeMenu();
+        let content = document.getElementById("container");
+        let loading = document.getElementById("loading");
         delete localStorage.userInfo;
         content.innerHTML = "";
         loading.style.display = "block";
