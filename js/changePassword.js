@@ -107,6 +107,9 @@ var itemsLength;
                         btn.disabled = false;
                         btn.innerText = 'Change';
                         success.style.display = "flex";
+                        let userInfo = JSON.parse(localStorage.userInfo);
+                        userInfo.password = document.getElementById("newPassword").value;
+                        localStorage.userInfo = userInfo;
                     }
                     else{
                         btn.style.background = '';
